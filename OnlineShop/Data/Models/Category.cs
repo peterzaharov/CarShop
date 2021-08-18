@@ -8,8 +8,8 @@ namespace OnlineShop.Data.Models
     public class Category
     {
         public int Id { get; set; }
-        public int CategoryName { get; set; }
-        public int CategoryDescription { get; set; }
+        public string CategoryName { get; set; }
+        public string CategoryDescription { get; set; }
         public List<Car> Cars { get; set; }
     }
 }
