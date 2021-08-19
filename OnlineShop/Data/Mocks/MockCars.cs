@@ -16,8 +16,19 @@ namespace OnlineShop.Data.Mocks
             {
                 return new List<Car>
                 {
-                    new Car{ Name = "Tesla", ShortDescription = "", LongDescription = "", Image = "",
-                             Price = 50000, IsFavorite = true, Available = true, Category = carsCategory.AllCategories.First() }
+                    new Car { Name = "Tesla", ShortDescription = "", LongDescription = "", Image = "",
+                             Price = 50000, IsFavorite = true, Available = true, Category = carsCategory.AllCategories.First() },
+                    new Car
+                    {
+                        Name = "Lada Vesta",
+                        ShortDescription = "Новая Лада",
+                        LongDescription = "Говорят, что стала лучше предшественниц...",
+                        Image = "https://images.app.goo.gl/VQFxD45MZ3NqxF8w6",
+                        Price = 10000,
+                        IsFavorite = true,
+                        Available = true,
+                        Category = carsCategory.AllCategories.Last()
+                    }
                 };
             }
         }
