@@ -1,28 +1,11 @@
-﻿@using OnlineShop.Data.Models
-@model IEnumerable<Car>
-
+﻿<h1>Все автомобили</h1>
+<h3>@Model.CarCategory</h3>
 @{
-    Layout = null;
-}
-
-<!DOCTYPE html>
-
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>ListCars</title>
-</head>
-<body>
-    <h1>Все автомобили</h1>
-    <h3>@ViewBag.Category</h3>
-    @{
-        foreach(var car in Model)
-            {
-                <div>
-                    <h2>Модель: @car.Name</h2>
-                    <p>Цена: @car.Price.ToString("c")</p>
-                </div>
-            }
+    foreach (var car in Model.AllCars)
+    {
+        <div>
+            <h2>Модель: @car.Name</h2>
+            <p>Цена: @car.Price.ToString("c")</p>
+        </div>
     }
-</body>
-</html>
+}

@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using OnlineShop.Data.Interfaces;
+using OnlineShop.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,9 +19,11 @@ namespace OnlineShop.Data.Controllers
         }
         public ViewResult ListCars()
         {
-            ViewBag.Category = "Some new";
-            var cars = allCars.AllCars;
-            return View(cars);
+            ViewBag.Title = "Страница с автомобилями";
+            CarListViewModel obj = new CarListViewModel();
+            obj.AllCars = allCars.AllCars;
+            obj.CarCategory = "Автомобили";
+            return View(obj);
         }
     }
 }
