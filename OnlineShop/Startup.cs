@@ -38,6 +38,12 @@ namespace OnlineShop
             app.UseStatusCodePages();
             app.UseStaticFiles();
             app.UseMvcWithDefaultRoute();
+
+            using(var scope = app.ApplicationServices.CreateScope())
+            {
+                CarShopDBContext context = scope.ServiceProvider.GetRequiredService<CarShopDBContext>();
+                DBObjects.Initial(context);
+            }
         }
     }
 }
