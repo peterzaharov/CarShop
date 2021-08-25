@@ -8,6 +8,7 @@ using Microsoft.Extensions.Hosting;
 using OnlineShop.Data;
 using OnlineShop.Data.Interfaces;
 using OnlineShop.Data.Mocks;
+using OnlineShop.Data.Models;
 using OnlineShop.Data.Repository;
 using System;
 using System.Collections.Generic;
@@ -28,7 +29,13 @@ namespace OnlineShop
             services.AddDbContext<CarShopDBContext>(option => option.UseSqlServer(confString.GetConnectionString("DefaultConnection")));
             services.AddTransient<IAllCars, CarRepository>();
             services.AddTransient<ICarsCategory, CategoryRepository>();
+
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            services.AddScoped(sp => ShopCart.GetCarts(sp));
+
             services.AddMvc(option => option.EnableEndpointRouting = false);
+            services.AddMemoryCache();
+            services.AddSession();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -37,6 +44,7 @@ namespace OnlineShop
             app.UseDeveloperExceptionPage();
             app.UseStatusCodePages();
             app.UseStaticFiles();
+            app.UseSession();
             app.UseMvcWithDefaultRoute();
 
             using(var scope = app.ApplicationServices.CreateScope())
