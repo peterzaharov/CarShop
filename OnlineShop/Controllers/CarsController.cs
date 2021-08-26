@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using OnlineShop.Data.Interfaces;
+using OnlineShop.Data.Models;
 using OnlineShop.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -17,13 +18,37 @@ namespace OnlineShop.Data.Controllers
             this.allCars = allCars;
             this.carsCategory = carsCategory;
         }
-        public ViewResult ListCars()
+        
+        [Route("Cars/ListCars")]
+        [Route("Cars/ListCars/{carCategory}")]
+        public ViewResult ListCars(string carCategory)
         {
+            string category = carCategory;
+            IEnumerable<Car> cars = null;
+            string currCategory = "";
+
+            if (string.IsNullOrEmpty(category))
+                cars = allCars.AllCars.OrderBy(i => i.Id);
+            else
+            {
+                if (string.Equals("fuel", category, StringComparison.OrdinalIgnoreCase))
+                {
+                    cars = allCars.AllCars.Where(i => i.Category.CategoryName.Equals("Автомобили")).OrderBy(i => i.Id);
+                    currCategory = "Автомобили";
+                }
+                    
+                else if (string.Equals("electro", category, StringComparison.OrdinalIgnoreCase))
+                {
+                    cars = allCars.AllCars.Where(i => i.Category.CategoryName.Equals("Электромобили")).OrderBy(i => i.Id);
+                    currCategory = "Электромобили";
+                }
+            }
+
+            CarListViewModel carObj = new CarListViewModel { AllCars = cars, CarCategory = currCategory };
+
             ViewBag.Title = "Страница с автомобилями";
-            CarListViewModel obj = new CarListViewModel();
-            obj.AllCars = allCars.AllCars;
-            obj.CarCategory = "Автомобили";
-            return View(obj);
+
+            return View(carObj);
         }
     }
 }

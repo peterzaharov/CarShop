@@ -4,16 +4,10 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
 using OnlineShop.Data;
 using OnlineShop.Data.Interfaces;
-using OnlineShop.Data.Mocks;
 using OnlineShop.Data.Models;
 using OnlineShop.Data.Repository;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace OnlineShop
 {
@@ -45,7 +39,13 @@ namespace OnlineShop
             app.UseStatusCodePages();
             app.UseStaticFiles();
             app.UseSession();
-            app.UseMvcWithDefaultRoute();
+            //app.UseMvcWithDefaultRoute();
+            app.UseMvc(routes =>
+            {
+                routes.MapRoute(name: "default", template: "{controller=Home}/{action=Index}/{id?}");
+                routes.MapRoute(name: "categoryFilter", template: "Car/{action}/{carCategory?}", 
+                                defaults: new { Controller = "Car", action = "ListCars" });
+            });
 
             using(var scope = app.ApplicationServices.CreateScope())
             {
