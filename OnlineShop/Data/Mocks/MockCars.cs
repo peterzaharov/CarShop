@@ -34,7 +34,7 @@ namespace OnlineShop.Data.Mocks
                         LongDescription = "Говорят, что стала лучше предшественниц...",
                         Image = "/img/vesta.png",
                         Price = 10000,
-                        IsFavorite = true,
+                        IsFavorite = false,
                         Available = true,
                         Category = carsCategory.AllCategories.Last()
                     }
