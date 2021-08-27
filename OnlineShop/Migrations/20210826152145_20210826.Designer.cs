@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using OnlineShop.Data;
 
 namespace OnlineShop.Migrations
 {
     [DbContext(typeof(CarShopDBContext))]
-    partial class CarShopDBContextModelSnapshot : ModelSnapshot
+    [Migration("20210826152145_20210826")]
+    partial class _20210826
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -75,61 +77,6 @@ namespace OnlineShop.Migrations
                     b.ToTable("Categories");
                 });
 
-            modelBuilder.Entity("OnlineShop.Data.Models.Order", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Address")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Email")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("FirstName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("LastName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Phone")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("orderDateTime")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Orders");
-                });
-
-            modelBuilder.Entity("OnlineShop.Data.Models.OrderDetail", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("CarId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("OrderId")
-                        .HasColumnType("int");
-
-                    b.Property<long>("Price")
-                        .HasColumnType("bigint");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("CarId");
-
-                    b.HasIndex("OrderId");
-
-                    b.ToTable("OrderDetails");
-                });
-
             modelBuilder.Entity("OnlineShop.Data.Models.ShopCartItem", b =>
                 {
                     b.Property<int>("Id")
@@ -164,25 +111,6 @@ namespace OnlineShop.Migrations
                     b.Navigation("Category");
                 });
 
-            modelBuilder.Entity("OnlineShop.Data.Models.OrderDetail", b =>
-                {
-                    b.HasOne("OnlineShop.Data.Models.Car", "Car")
-                        .WithMany()
-                        .HasForeignKey("CarId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("OnlineShop.Data.Models.Order", "Order")
-                        .WithMany("orderDetails")
-                        .HasForeignKey("OrderId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Car");
-
-                    b.Navigation("Order");
-                });
-
             modelBuilder.Entity("OnlineShop.Data.Models.ShopCartItem", b =>
                 {
                     b.HasOne("OnlineShop.Data.Models.Car", "Car")
@@ -195,11 +123,6 @@ namespace OnlineShop.Migrations
             modelBuilder.Entity("OnlineShop.Data.Models.Category", b =>
                 {
                     b.Navigation("Cars");
-                });
-
-            modelBuilder.Entity("OnlineShop.Data.Models.Order", b =>
-                {
-                    b.Navigation("orderDetails");
                 });
 #pragma warning restore 612, 618
         }

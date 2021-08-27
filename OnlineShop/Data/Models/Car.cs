@@ -12,7 +12,7 @@ namespace OnlineShop.Data.Models
         public string ShortDescription { get; set; }
         public string LongDescription { get; set; }
         public string Image { get; set; }
-        public ushort Price { get; set; }
+        public uint Price { get; set; }
         public bool IsFavorite { get; set; }
         public bool Available { get; set; }
         public int CategoryId { get; set; }

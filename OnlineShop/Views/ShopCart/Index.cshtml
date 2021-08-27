@@ -4,10 +4,10 @@
     @foreach(var element in Model.shopCart.ListItems)
             {
                 <div class="alert alert-warning mt-3">
-                    <b>Автомобиль:</b> @element.Car<br />
+                    <b>Автомобиль:</b> @element.Car.Name<br />
                     <b>Цена:</b> @element.Price.ToString("c")
                 </div>
             }
     <hr />
-    <div class="btn btn-danger" asp-controller="Order">Оплатить</div>
+    <a class="btn btn-danger" asp-controller="Order" asp-action="CheckOut">Оплатить</a>
 </div>

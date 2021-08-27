@@ -23,11 +23,11 @@ namespace OnlineShop.Data
                 (
                     new Car
                     {
-                        Name = "Tesla",
-                        ShortDescription = "Лютая электро-телега",
+                        Name = "Tesla Model 3",
+                        ShortDescription = "Самый продаваемый электромобиль в истории",
                         LongDescription = "Прекрасный и быстрый электромобиль",
                         Image = "/img/tesla.jpg",
-                        Price = 50000,
+                        Price = 2581000,
                         IsFavorite = true,
                         Available = true,
                         Category = Categories["Электромобили"]

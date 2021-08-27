@@ -27,12 +27,12 @@ namespace OnlineShop.Controllers
 
             return View(obj);
         }
-        public RedirectToActionResult actionResult(int id)
+        public RedirectToActionResult AddToCart(int id)
         {
             var item = carRepository.AllCars.FirstOrDefault(i => i.Id == id);
             if (item != null)
             {
-                shopCart.AddCart(item);
+                shopCart.AddToCart(item);
             }
 
             return RedirectToAction("Index");

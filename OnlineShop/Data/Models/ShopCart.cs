@@ -27,7 +27,7 @@ namespace OnlineShop.Data.Models
 
             return new ShopCart(context) { ShopCarId = shopCartId };
         }
-        public void AddCart(Car car)
+        public void AddToCart(Car car)
         {
             carShopDBContext.ShopCartItems.Add(new ShopCartItem
             {
